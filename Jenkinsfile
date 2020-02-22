@@ -1,6 +1,9 @@
 pipeline {
     agent any
 
+    environment{
+        PATH = ""
+    }
     stages {
         stage('SCM Checkout'){
             steps{
@@ -10,7 +13,7 @@ pipeline {
         stage('Package') {
 			steps {
 			   echo 'Package...'
-                bat 'mvn clean package'
+                bat "mvn clean package"
             }
         }
     }
