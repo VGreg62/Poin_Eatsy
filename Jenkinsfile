@@ -9,7 +9,7 @@ pipeline {
 			steps {
 			    def mvnHome = tool name: 'Maven_3_6_3', type: 'maven'
 				echo 'Package...'
-                sh "$(mvnHome)/bin/mvn clean package'
+                sh "$(mvnHome)/bin/mvn clean package"
             }
         }
     }
