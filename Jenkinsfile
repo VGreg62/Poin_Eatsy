@@ -8,7 +8,9 @@ pipeline {
         stage('Package') {
 			steps {
 			   echo 'Package...'
-               bat "mvn clean package"
+			   withMaven(maven: 'maven_3_6_3'){
+                bat "mvn clean package"
+               }
             }
         }
     }
