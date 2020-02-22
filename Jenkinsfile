@@ -2,10 +2,14 @@ pipeline {
     agent any
 
     stages {
+        stage('SCM Checkout'){
+            git 'https://github.com/VGreg62/Poin_Eatsy'
+        }
         stage('Package') {
 			steps {
+			    def mvnHome = tool name: 'Maven_3_6_3', type: 'maven'
 				echo 'Package...'
-                sh 'mvn clean package'
+                sh "$(mvnHome)/bin/mvn clean package'
             }
         }
     }
