@@ -20,6 +20,6 @@ public class UtilsTest {
     void sommeCommandeFail() {
         ArrayList<Double> commande = new ArrayList<>(Arrays.asList(20.0, 30.5, 15.9, 21.6));
 
-        assertNotEquals(86.0, Calculator.sommeCommande(commande));
+       assertNotEquals(86.0, Calculator.sommeCommande(commande));
     }
 }
