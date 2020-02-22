@@ -9,7 +9,7 @@ pipeline {
 			steps {
 			   echo 'Package...'
 			   withMaven(maven: 'maven_3_6_3'){
-                sh "mvn clean package"
+                sh 'mvn clean package'
                }
             }
         }
