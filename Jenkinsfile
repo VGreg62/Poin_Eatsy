@@ -1,13 +1,32 @@
 pipeline {
-    agent any
+   agent any
 
-    stages {
-        stage('Package') {
-			steps {
-			   bat 'mvn clean'
-			   echo 'Package...'
-			   bat 'mvn package'
+   tools {
+      // Install the Maven version configured as "M3" and add it to the path.
+      maven "maven_3_6_3"
+   }
+
+   stages {
+      stage('Build') {
+         steps {
+            // Get some code from a GitHub repository
+            git 'https://github.com/VGreg62/Poin_Eatsy.git'
+
+            // Run Maven on a Unix agent.
+            sh "mvn clean package"
+
+            // To run Maven on a Windows agent, use
+            // bat "mvn -Dmaven.test.failure.ignore=true clean package"
+         }
+
+         post {
+            // If Maven was able to run the tests, even if some of the test
+            // failed, record the test results and archive the jar file.
+            success {
+               junit '**/target/surefire-reports/TEST-*.xml'
+               archiveArtifacts 'target/*.jar'
             }
-        }
-    }
+         }
+      }
+   }
 }
