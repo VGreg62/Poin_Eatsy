@@ -5,7 +5,7 @@ pipeline {
         stage('Package') {
 			steps {
 				echo 'Package...'
-                bat 'mvn clean package'
+                sh 'mvn clean package'
             }
         }
     }
