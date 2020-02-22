@@ -5,15 +5,10 @@ pipeline {
         PATH = ""
     }
     stages {
-        stage('SCM Checkout'){
-            steps{
-                git 'https://github.com/VGreg62/Poin_Eatsy'
-            }
-        }
         stage('Package') {
 			steps {
 			   echo 'Package...'
-                bat "mvn clean package"
+               bat "mvn clean package"
             }
         }
     }
