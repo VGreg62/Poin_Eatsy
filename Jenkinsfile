@@ -7,10 +7,18 @@ pipeline {
     stages {
         stage('Package') {
 			steps {
-			   echo 'Package...'
+			   echo 'Compile...'
 			   withMaven(maven: 'maven_3_6_3'){
-                sh 'mvn clean package'
+                sh 'mvn clean compile'
                }
+            }
+        }
+        stage('Test'){
+            steps{
+                echo 'Test...'
+                withMaven(maven: 'maven_3_6_3'){
+                 sh 'mvn test'
+                }
             }
         }
     }
