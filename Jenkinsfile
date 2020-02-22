@@ -3,7 +3,9 @@ pipeline {
 
     stages {
         stage('SCM Checkout'){
-            git 'https://github.com/VGreg62/Poin_Eatsy'
+            steps{
+                git 'https://github.com/VGreg62/Poin_Eatsy'
+            }
         }
         stage('Package') {
 			steps {
