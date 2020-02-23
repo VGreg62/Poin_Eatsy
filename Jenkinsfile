@@ -18,7 +18,10 @@ pipeline {
       stage('Test'){
         steps{
             echo 'Test...'
+            echo 'Checkstyle...'
             sh "mvn checkstyle:checkstyle"
+            echo 'PMD Source Coe Analyzer Project'
+            sh "mvn pmd:pmd"
         }
       }
    }
@@ -32,8 +35,7 @@ pipeline {
         junit '**/target/surefire-reports/*.xml'
         recordIssues enabledForFailure : true, tools: [mavenConsole(), java(), javaDoc()]
         recordIssues enabledForFailure : true, tool: checkStyle()
-
+        recordIssues enabledForFailure : true, tool: pmdParser(pattern: '**/target/pmd.xml')
       }
    }
-
 }
