@@ -30,8 +30,8 @@ pipeline {
       }
       always{
         junit '**/target/surefire-reports/*.xml'
-        recordIssues enabledForFailure : true, tools: [mavenConsole(), java(), javadoc()]
-        recordIssues enabledForFailure : true, tool: checkstyle()
+        recordIssues enabledForFailure : true, tools: [mavenConsole(), java(), javaDoc()]
+        recordIssues enabledForFailure : true, tool: checkStyle()
 
       }
    }
