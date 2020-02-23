@@ -27,7 +27,7 @@ pipeline {
       stage('Deploy'){
         steps{
             echo 'Deploy...'
-            echo 'TODO : Sonartype'
+            nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-snapshots', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/target/eatsy_back.jar']], mavenCoordinate: [artifactId: 'back', groupId: 'fr.eatsyManager', packaging: 'jar', version: '1.0.0-SNAPSHOT']]], tagName: '1.1'
         }
       }
    }
@@ -38,7 +38,6 @@ pipeline {
          archiveArtifacts '**/target/*.xml'
       }
       always{
-        junit '**/target/surefire-reports/*.xml'
         recordIssues enabledForFailure : true, tools: [mavenConsole(), java(), javaDoc()]
         recordIssues enabledForFailure : true, tool: checkStyle()
         recordIssues enabledForFailure : true, tool: pmdParser(pattern: '**/target/pmd.xml')
