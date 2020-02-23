@@ -28,6 +28,12 @@ pipeline {
          archiveArtifacts 'target/*.jar'
          archiveArtifacts 'target/*.xml'
       }
+      always{
+        junit '**/target/surefire-reports/*.xml'
+        recordIssues enabledForFailure : true, tools: [mavenConsole(), java(), javadoc()]
+        recordIssues enabledForFailure : true, tool: checkstyle()
+
+      }
    }
 
 }
