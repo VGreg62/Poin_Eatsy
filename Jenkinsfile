@@ -20,16 +20,22 @@ pipeline {
             echo 'Test...'
             echo 'Checkstyle...'
             sh "mvn checkstyle:checkstyle"
-            echo 'PMD Source Coe Analyzer Project'
+            echo 'PMD Source Coe Analyzer Project...'
             sh "mvn pmd:pmd"
+        }
+      }
+      stage('Deploy'){
+        steps{
+            echo 'Deploy...'
+            echo 'TODO : Sonartype'
         }
       }
    }
    post {
       success {
          junit '**/target/surefire-reports/*.xml'
-         archiveArtifacts 'target/*.jar'
-         archiveArtifacts 'target/*.xml'
+         archiveArtifacts '**/target/*.jar'
+         archiveArtifacts '**/target/*.xml'
       }
       always{
         junit '**/target/surefire-reports/*.xml'
