@@ -10,15 +10,23 @@ pipeline {
       stage('Build') {
          steps {
             git 'https://github.com/VGreg62/Poin_Eatsy.git'
+            echo 'Build...'
             sh "mvn clean package"
 
          }
       }
+      stage('Test'){
+        steps{
+            echo 'Test...'
+            sh "mvn checkstyle:checkstyle"
+        }
+      }
    }
    post {
       success {
-         junit '**/target/surefire-reports/TEST-*.xml'
-            archiveArtifacts 'target/*.jar'
+         junit '**/target/surefire-reports/*.xml'
+         archiveArtifacts 'target/*.jar'
+         archiveArtifacts 'target/*.xml'
       }
    }
 
