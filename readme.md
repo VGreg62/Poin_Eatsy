@@ -1,8 +1,8 @@
 # Equipe
 
 * Alessandro CECOTTI,
-* Alexandre HALLEUX,
+* Alexandre HALLEUX, 
 * Grégory VIANDIER
 
-# Installation a effectué
+# Installation à effectuer
 
