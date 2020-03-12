@@ -78,7 +78,6 @@
         </plugins>
     </reporting>
     <build>
-        <finalName>eatsy_back</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
