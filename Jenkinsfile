@@ -11,7 +11,7 @@ pipeline {
          steps {
             git 'https://github.com/VGreg62/Poin_Eatsy.git'
             echo 'Build...'
-            sh "mvn clean package"
+            bat "mvn clean package"
 
          }
       }
@@ -19,9 +19,9 @@ pipeline {
         steps{
             echo 'Test...'
             echo 'Checkstyle...'
-            sh "mvn checkstyle:checkstyle"
+            bat "mvn checkstyle:checkstyle"
             echo 'PMD Source Coe Analyzer Project...'
-            sh "mvn pmd:pmd"
+            bat "mvn pmd:pmd"
         }
       }
       stage('Deploy'){
