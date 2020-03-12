@@ -27,7 +27,7 @@ pipeline {
       stage('Deploy'){
         steps{
             echo 'Deploy...'
-            nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-snapshots', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/target/eatsy_back.jar']], mavenCoordinate: [artifactId: 'back', groupId: 'fr.eatsyManager', packaging: 'jar', version: '1.0.0-SNAPSHOT']]], tagName: '1.1'
+            //nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-snapshots', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/target/eatsy_back.jar']], mavenCoordinate: [artifactId: 'back', groupId: 'fr.eatsyManager', packaging: 'jar', version: '1.0.0-RELEASE']]], tagName: '1.1'
         }
       }
    }
