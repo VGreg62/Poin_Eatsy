@@ -1,9 +1,30 @@
+def groupId = ''
+def artefactId = ''
+def filePath = ''
+def packaging = ''
+def version = ''
+def verCode = UUID.randomUUID().toString()
+
 pipeline {
    agent any
 
    tools {
       // Install the Maven version configured as "maven_3_6_3" and add it to the path.
       maven "maven_3_6_3"
+   }
+
+   environment {
+
+        // This can be nexus3 or nexus2
+        NEXUS_VERSION = "nexus3"
+        // This can be http or https
+        NEXUS_PROTOCOL = "http"
+        // Where your Nexus is running
+        NEXUS_URL = "localhost:8081"
+        // Repository where we will upload the artifact
+        NEXUS_REPOSITORY = "maven-snapshots"
+        // Jenkins credential id to authenticate to Nexus OSS
+        NEXUS_CREDENTIAL_ID = "nexus_localhost"
    }
 
    stages {
@@ -25,10 +46,17 @@ pipeline {
         }
       }
       stage('Deploy'){
+        script{
+            pom = readMavenPom file: 'pom.xml'
+            groupId = pom.groupId
+            artifactId = pom.artifactId
+            packaging = pom.packaging
+            version = pom.version
+            filepath = "target/${artifactId}-${version}.jar"
+        }
         steps{
-            def pom = readMavenPom file : 'pom.xml'
             echo 'Deploy...'
-            nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target/eatsy_back.jar']], mavenCoordinate: [artifactId: 'back', groupId: '${pom.groupId}', packaging: '${pom.packaging}', version: '${pom.version}-release']]]
+            nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${filepath}"]], mavenCoordinate: [artifactId: "${artifactId}", groupId: "${groupId}", packaging: "${packaging}", version: "${version}-${verCode}"]]]
         }
       }
    }
