@@ -5,5 +5,15 @@
 * Alexandre HALLEUX,
 * Grégory VIANDIER
 
-# Installation a effectué
+# Plugins à installer
 
+Les plugins que vous devez installer :
+* Nexus Plateforme
+* Pipeline Maven Integration Plugin
+* Pipeline Utility Steps
+* Subversion
+* Warnings Next Generation
+
+# Outils à créer
+
+Vous devez installer un Maven que vous appellerez 'maven_3_6_3'
