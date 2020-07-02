@@ -17,3 +17,4 @@ Les plugins que vous devez installer :
 # Outils à créer
 
 Vous devez installer un Maven que vous appelerez 'maven_3_6_3'
+test
